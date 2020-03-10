@@ -64,7 +64,7 @@ await API().getList('GET').then((response) {
               Fluttertoast.showToast(msg: 'click to login',fontSize: 14.0),
               getData(),
               login(),
-              Navigator.pushNamed(context, '/')
+//              Navigator.pushNamed(context, '/')
             },
           )
         ]
