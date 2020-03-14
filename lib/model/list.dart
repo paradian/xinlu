@@ -62,9 +62,10 @@ await API().getList('GET').then((response) {
             child: Text('back'),
             onPressed: () =>{
               Fluttertoast.showToast(msg: 'click to login',fontSize: 14.0),
-              getData(),
-              login(),
-//              Navigator.pushNamed(context, '/')
+//              getData(),
+//              login(),
+//            _loginDemo(),
+              Navigator.pushNamed(context,posts[index].path)
             },
           )
         ]
@@ -77,6 +78,7 @@ await API().getList('GET').then((response) {
       appBar: AppBar(
         title: Text('app'),
         elevation: 0.0,
+
       ),
       body: ListView.builder(
         itemBuilder: list,
