@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:app/fetch/api.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:app/components/bottom_navigator.dart';
 var dio = Dio();
 var url = 'https://www.apidevelop.com/subway/city/data.json';
 
@@ -63,7 +63,7 @@ await API().getList('GET').then((response) {
             onPressed: () =>{
               Fluttertoast.showToast(msg: 'click to login',fontSize: 14.0),
 //              getData(),
-//              login(),
+              login(),
 //            _loginDemo(),
               Navigator.pushNamed(context,posts[index].path)
             },
@@ -84,6 +84,7 @@ await API().getList('GET').then((response) {
         itemBuilder: list,
         itemCount: posts.length,
       ),
+      bottomNavigationBar: BottomNavigation(),
     );
   }
 }

@@ -30,10 +30,10 @@ class Fetch {
     _dio.options.contentType = 'application/json';
     (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
       // config the http client
-      client.findProxy = (uri) {
-        //proxy all request to localhost:8888
-        return "PROXY 192.168.1.138:8889";
-      };
+//      client.findProxy = (uri) {
+//        //proxy all request to localhost:8888
+//        return "PROXY 192.168.1.138:8889";
+//      };
       // you can also create a new HttpClient to dio
       // return new HttpClient();
     };
@@ -57,14 +57,7 @@ class Fetch {
         CancelToken cancelToken,
       })
   async {
-    switch(method){
-      case  'GET':
-        print(method);
-        break;
-      case 'POST':
-        print(method);
-        break;
-    }
+
     Response response = await _dio.request(
       path,
       queryParameters: queryParameters,
@@ -133,10 +126,10 @@ class Fetch {
           response.statusCode.toString() +
           "\n[request   ]:   " +
           _getOptionsStr(response.request));
-      _printDataStr("reqdata ", response.request.data);
-      _printDataStr("queryParameters ", response.request.queryParameters);
-      _printDataStr("response", response.data);
-      print("----------------Http Log Stop----------------");
+//      _printDataStr("reqdata ", response.request.data);
+//      _printDataStr("queryParameters ", response.request.queryParameters);
+//      _printDataStr("response", response.data);
+//      print("----------------Http Log Stop----------------");
     } catch (ex) {
       print("Http Log" + " error......");
     }

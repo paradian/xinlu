@@ -1,7 +1,14 @@
+import 'dart:io';
+
+import 'package:app/model/list.dart';
 import 'package:app/model/post.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
+import 'package:app/components/drawer_demo.dart';
+import 'package:app/components/bottom_navigator.dart';
+import 'package:path_provider/path_provider.dart';
 class Home extends StatelessWidget{
+
   //list 构建列表渲染
   Widget list(BuildContext context,int index) {
     return Container(
@@ -11,6 +18,7 @@ class Home extends StatelessWidget{
         children: <Widget>[
           SizedBox(height: 16.0),
           Text(posts[index].title),
+//          NetworkAssetBundle(),
           FlatButton(
             child: Text(posts[index].descript),
             textColor: Colors.teal,
@@ -33,6 +41,8 @@ class Home extends StatelessWidget{
       ),
       body: ListView.builder(itemBuilder: list,
       itemCount: posts.length,),
+      drawer: DrawerDemo(),
+      bottomNavigationBar: BottomNavigation()
 
     );
   }

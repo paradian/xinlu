@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:app/components/bottom_navigator.dart';
 class Counter extends StatefulWidget {
   // This class is the configuration for the state. It holds the
   // values (in this nothing) provided by the parent and used by the build
@@ -32,7 +32,17 @@ class _CounterState extends State<Counter> {
     // build methods fast, so that you can just rebuild anything that
     // needs updating rather than having to individually change
     // instances of widgets.
-    return new Row(
+//    return new Row(
+//      children: <Widget>[
+//        new RaisedButton(
+//          onPressed: _increment,
+//          child: new Text('Increment'),
+//        ),
+//        new Text('Count: $_counter'),
+//      ],
+//    );
+      return Scaffold(
+        body: Row(
       children: <Widget>[
         new RaisedButton(
           onPressed: _increment,
@@ -40,6 +50,9 @@ class _CounterState extends State<Counter> {
         ),
         new Text('Count: $_counter'),
       ],
-    );
+    ),
+        bottomNavigationBar: BottomNavigation(),
+      );
+
   }
 }
