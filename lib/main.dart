@@ -1,42 +1,14 @@
 import 'package:flutter/material.dart';
-import 'model/post.dart';
-import 'model/list.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:app/model/home.dart';
+//import 'model/post.dart';
+//import 'model/list.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
+//import 'package:app/model/home.dart';
 import 'package:app/routes/routes.dart';
 import 'package:provider/provider.dart';
-
-//注册一个状态管理的model
-class CountModel with ChangeNotifier {
-  int _counter = 8;
-  int get value => _counter;
-  void increment (){
-    _counter ++;
-    notifyListeners();
-  }
-}
-class BottomModel with ChangeNotifier {
-  int _currentIndex = 0;
-  int get value => _currentIndex;
-   setIndex(index){
-    print('$index---$_currentIndex');
-
-    _currentIndex = index;
-    notifyListeners();
-  }
-}
-//void main() => runApp(App());
+import 'common/provider_model.dart';
 void main() {
-  final counter = CountModel();
-  final active = BottomModel();
-  final textSize = 48;
   runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider.value(value: counter),
-      ChangeNotifierProvider.value(value: active),
-      Provider.value(value: textSize),
-
-    ],
+    providers: providerList,
     child: App(),
   ));
 }

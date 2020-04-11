@@ -1,6 +1,11 @@
+import 'package:app/fetch/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'package:app/fetch/api.dart';
+import 'dart:async';
 final _formKey = GlobalKey<FormState>();
 
 class FormPage extends StatefulWidget {
@@ -11,6 +16,12 @@ class FormPage extends StatefulWidget {
 
 class _FormPage extends State<FormPage> {
   int count = 0;
+  void login() async{
+    var obj = {"name":'admin',"password":123456};
+    await API().Login(obj).then((response){
+      print(response);
+    });
+  }
   void AddCount() {
     print('enter,$count');
     setState(() {
@@ -57,6 +68,12 @@ class _Form1 extends State<FormPage> {
   var _character = '';
   double percent = 71;
   bool checkValue = false;
+  void login() async{
+    var obj = {"username":'account',"password":'e10adc3949ba59abbe56e057f20f883e'};
+    await API().Login(obj).then((response){
+      print(response );
+    });
+  }
   void AddCount() {
     print('enter,$count');
     setState(() {
@@ -75,6 +92,21 @@ class _Form1 extends State<FormPage> {
     setState(() {
       percent = value;
     });
+  }
+  Future<File> _getLocalFile() async {
+    // get the path to the document directory.
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    return new File('$dir/token.txt');
+  }
+
+
+
+  Future<Null> _setToken(token) async {
+//    setState(() {
+//      _counter++;
+//    });
+    // write the variable as a string to the file
+    await (await _getLocalFile()).writeAsString('$token');
   }
   @override
   Widget build(BuildContext context) {
@@ -186,6 +218,7 @@ class _Form1 extends State<FormPage> {
 
                       if (_formKey.currentState.validate()) {
                         // Process data.
+                        login();
                       }
                     },
                     child: Text('Submit'),

@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
-
+import 'package:app/common/provider_model.dart';
 class BottomNavigation extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

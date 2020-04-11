@@ -15,7 +15,7 @@ final Routers = {
   '/form': (context) => Counter(),
   '/filesystem': (context) => FlutterDemo(),
   '/formpage': (context) => FormPage(),
-  '/requestpage': (context) => RequestPage(),
+  '/subway-detail': (context,{arguments}) => RequestPage(arguments: arguments),
   '/list-render':(context) => ListRender()
 };
 

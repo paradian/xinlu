@@ -2,6 +2,27 @@ import 'package:dio/dio.dart';
 import 'package:dio/adapter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:async';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+String _token = '';
+void getToken () async {
+ _token = await _readToken();
+
+}
+Future<File> _getFile() async {
+  String dir = (await getApplicationDocumentsDirectory()).path;
+  return new File('$dir/token.txt');
+}
+Future<String> _readToken() async {
+  try {
+    File file = await _getFile();
+    // read the variable as a string from the file.
+    String contents = await file.readAsString();
+    return contents;
+  } on FileSystemException {
+    return '';
+  }
+}
 class Fetch {
   static final Fetch _singleton = Fetch._init();
   static Dio _dio;
@@ -22,7 +43,7 @@ class Fetch {
  * _dio 配置过后的dio
  * **/
     BaseOptions options = new BaseOptions(
-      baseUrl: "",
+      baseUrl: "https://admin.xuegongbang.cn/admin",
       connectTimeout: 1000 * 10,
       receiveTimeout: 1000 * 20,
     );
@@ -111,6 +132,7 @@ class Fetch {
       options = new Options();
     }
     options.method = method ;
+    options.headers['token'] = _token;
 //    options.headers['content-type'] = 'application/json';
     return options;
   }

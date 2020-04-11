@@ -4,7 +4,7 @@ import 'package:app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-
+import 'package:app/common/provider_model.dart';
 
 class FlutterDemo extends StatefulWidget {
   FlutterDemo({Key key}) : super(key: key);
