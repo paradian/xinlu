@@ -104,7 +104,8 @@ class _ListRender extends State<ListRender>{
   }
 
   Widget array (BuildContext context ,int index){
-
+    // print(arrays[0] is Map);
+    //  print(arrays[0]);
     return Container(
       child: Column(
         children: <Widget>[

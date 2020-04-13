@@ -28,14 +28,40 @@ class userToken with ChangeNotifier {
     notifyListeners();
   }
 }
+class CartItem {
+ CartItem({
+   this.name,
+   this.count,
+   this.price
+});
+   String name;
+  int count;
+  double price;
+}
+class cartListModel with ChangeNotifier {
+  
+  var _list = [];
+  get value => _list;
+  addItem(item){
+    print('enter${_list.length}--$item');
+    _list.add(item);
+    notifyListeners();
+  }
+  removeItem(item){
+    _list.remove(item);
+    notifyListeners();
+  }
+}
 final counter = CountModel();
 final active = BottomModel();
 final token = userToken();
+final cartList = cartListModel();
 final textSize = 48;
 var providerList = [
   ChangeNotifierProvider.value(value: counter),
   ChangeNotifierProvider.value(value: active),
   ChangeNotifierProvider.value(value: token),
+  ChangeNotifierProvider.value(value: cartList),
   Provider.value(value: textSize),
 
 ];

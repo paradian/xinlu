@@ -12,12 +12,22 @@ class FlutterDemo extends StatefulWidget {
   @override
   _FlutterDemoState createState() => new _FlutterDemoState();
 }
-
+class CartItem {
+ CartItem({
+   this.name,
+   this.count,
+   this.price
+});
+   String name;
+  int count;
+  double price;
+}
 class _FlutterDemoState extends State<FlutterDemo> {
-  int _counter;
 
+  int _counter;
   @override
   void initState() {
+
     super.initState();
     _readCounter().then((int value) {
       setState(() {
@@ -44,6 +54,7 @@ class _FlutterDemoState extends State<FlutterDemo> {
   }
 
   Future<Null> _incrementCounter() async {
+    print('enter');
     setState(() {
       _counter++;
     });
@@ -57,31 +68,36 @@ Future<Null> _clearCounter() async{
     _counter = 0;
   });
 }
+
   @override
   Widget build(BuildContext context) {
-    final counter = Provider.of<CountModel>(context);
-    final textSize = Provider.of<int>(context).toDouble();
-
+   final counter = Provider.of<CountModel>(context);
+   final textSize = Provider.of<int>(context).toDouble();
+   final cartList = Provider.of<cartListModel>(context);
     return new Scaffold(
       appBar: new AppBar(title: new Text('Flutter Demo')),
-      body: new Center(
+      body: new Container(
         child:Column(
           children: <Widget>[
+            cartList.value.length !=0 ? ListView.builder(itemBuilder: cart_list,itemCount: cartList.value.length,shrinkWrap: true,scrollDirection: Axis.vertical,):Text('null'),
             new Text('Button tapped $_counter time${
                 _counter == 1 ? '' : 's'
             }.'),
-            new FlatButton(onPressed: _clearCounter, child: Text('clear')),
-            Container(
-
-                child:FlatButton(onPressed: counter.increment,child:  Text('value id ${counter.value}',style: TextStyle(fontSize: textSize,color: Colors.deepPurple)),),
-
-            )
+             FlatButton(onPressed:()=>cartList.addItem(new CartItem(name:'烤面筋',count:2,price:3.5)), child: Text('加入烤面筋')),
+              FlatButton(onPressed:()=>cartList.addItem(new CartItem(name:'羊腰子',count:2,price:3.5)), child: Text('加入羊腰子')),
+               FlatButton(onPressed:()=>cartList.addItem(new CartItem(name:'虎鞭',count:2,price:3.5)), child: Text('加入虎鞭')),
+            new FlatButton(onPressed:()=> _clearCounter, child: Text('clear')),
+           FlatButton(onPressed: ()=>counter.increment(),child:  Text('value id ${counter.value}',style: TextStyle(fontSize: textSize,color: Colors.deepPurple)),),
+            Text(cartList.value.toString()),
+//
           ],
-        )
+        ),
+        height: 400.0,
+        width: 400.0,
 
       ),
       floatingActionButton: new FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed:() => _incrementCounter(),
         tooltip: 'Increment',
         child:
 
@@ -91,5 +107,25 @@ Future<Null> _clearCounter() async{
       ),
 
     );
+  }
+  Widget cart_list (BuildContext context,int index){
+//    final cartList = Provider.of<cartListModel>(context);
+print("cartList.value[0]");
+  print(cartList.value[0]);
+   print(cartList.value[0].name);
+  return  Container(
+  child: Column(
+  children: <Widget>[
+  Text('名称：${cartList.value[index].name}'),
+    Text('数量：${cartList.value[index].count}'),
+    Text('价格：${cartList.value[index].price}')
+    ],
+    
+    ),
+      width: 80.0,
+      height: 80.0,
+      
+  );
+
   }
 }
