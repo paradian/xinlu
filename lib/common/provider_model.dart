@@ -28,27 +28,45 @@ class userToken with ChangeNotifier {
     notifyListeners();
   }
 }
-class CartItem {
- CartItem({
-   this.name,
-   this.count,
-   this.price
-});
-   String name;
-  int count;
-  double price;
-}
+// class CartItem {
+//  CartItem({
+//    this.name,
+//    this.count,
+//    this.price
+// });
+//    String name;
+//   int count;
+//   double price;
+// }
 class cartListModel with ChangeNotifier {
   
   var _list = [];
+  int _total = 0;
+  // get total => total;
   get value => _list;
   addItem(item){
     print('enter${_list.length}--$item');
     _list.add(item);
     notifyListeners();
   }
-  removeItem(item){
-    _list.remove(item);
+  removeItem(index){
+    _list.removeAt(index);
+
+    notifyListeners();
+  }
+  changeItem(index,count){
+    if(count == 0){
+      _list.removeAt(index);
+    } else {
+_list[index].count = count;
+    }
+    notifyListeners();
+  }
+  getTotal(){
+    _list.length !=0 ?_list.forEach((item) =>{
+      _total += item.price*item.count
+    }):(_total = 0);
+    int total = _total;
     notifyListeners();
   }
 }
@@ -63,5 +81,4 @@ var providerList = [
   ChangeNotifierProvider.value(value: token),
   ChangeNotifierProvider.value(value: cartList),
   Provider.value(value: textSize),
-
 ];

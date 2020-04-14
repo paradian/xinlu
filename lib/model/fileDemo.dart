@@ -79,13 +79,14 @@ Future<Null> _clearCounter() async{
       body: new Container(
         child:Column(
           children: <Widget>[
-            cartList.value.length !=0 ? ListView.builder(itemBuilder: cart_list,itemCount: cartList.value.length,shrinkWrap: true,scrollDirection: Axis.vertical,):Text('null'),
+            SingleChildScrollView(child: cartList.value.length !=0 ? ListView.builder(itemBuilder: cart_list,itemCount: cartList.value.length,shrinkWrap: true,scrollDirection: Axis.vertical,):Text('null') ,),
+           
             new Text('Button tapped $_counter time${
                 _counter == 1 ? '' : 's'
             }.'),
-             FlatButton(onPressed:()=>cartList.addItem(new CartItem(name:'烤面筋',count:2,price:3.5)), child: Text('加入烤面筋')),
-              FlatButton(onPressed:()=>cartList.addItem(new CartItem(name:'羊腰子',count:2,price:3.5)), child: Text('加入羊腰子')),
-               FlatButton(onPressed:()=>cartList.addItem(new CartItem(name:'虎鞭',count:2,price:3.5)), child: Text('加入虎鞭')),
+             FlatButton(onPressed:()=>cartList.addItem(CartItem(name:'烤面筋',count:2,price:3.5)), child: Text('加入烤面筋')),
+              FlatButton(onPressed:()=>cartList.addItem(CartItem(name:'羊腰子',count:2,price:3.5)), child: Text('加入羊腰子')),
+               FlatButton(onPressed:()=>cartList.addItem( CartItem(name:'虎鞭',count:2,price:3.5)), child: Text('加入虎鞭')),
             new FlatButton(onPressed:()=> _clearCounter, child: Text('clear')),
            FlatButton(onPressed: ()=>counter.increment(),child:  Text('value id ${counter.value}',style: TextStyle(fontSize: textSize,color: Colors.deepPurple)),),
             Text(cartList.value.toString()),
