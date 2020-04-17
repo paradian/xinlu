@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:app/fetch/api.dart';
 import 'dart:async';
+
 final _formKey = GlobalKey<FormState>();
 
 class FormPage extends StatefulWidget {
@@ -164,6 +165,21 @@ class _Form1 extends State<FormPage> {
                   validator: (value) {
                     if (value.length < 5) {
                       return '你太短了！';
+                    }
+                    return null;
+                  },
+                  //输入框改变触发onchange事件
+                  onChanged: (res) => {print('当前输入：' + res)},
+                ),
+                 TextFormField(
+                  decoration: const InputDecoration(
+                    hintText: '请输入你的年龄',
+                  ),
+                 
+                  validator: (value) {
+                    print(value is String);
+                    if (value is int != true) {
+                      return '请输入数字';
                     }
                     return null;
                   },

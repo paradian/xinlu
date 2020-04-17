@@ -10,8 +10,8 @@ class RequestPage extends StatelessWidget {
   File _image;
   Widget build(BuildContext context) {
     final cartList = Provider.of<cartListModel>(context);
-    print("enter???${cartList.value[0].name}");
-    print(cartList.value.toString());
+    // print("enter???${cartList.value[0].name}");
+    // print(cartList.value.toString());
     print(arguments);
     getTotal(List list) {
       double total = 0;
@@ -20,7 +20,6 @@ class RequestPage extends StatelessWidget {
           : (total = 0);
       return total;
     }
-
     shareEvent() {
       final RenderBox box = context.findRenderObject();
       Share.share('follow me',subject:'www.baidu.com',sharePositionOrigin:box.localToGlobal(Offset.zero) &
@@ -64,49 +63,69 @@ class RequestPage extends StatelessWidget {
     );
   }
 
-  Widget cart(BuildContext context, int index) {
+ Widget cart(BuildContext context, int index) {
     return Container(
-      child: Column(
+      child: Row(
         children: <Widget>[
           // Checkbox(value: null, onChanged: null),
-          FlatButton(
+          SizedBox( 
+            width:100,
+            height:40,
+           child: FlatButton(
             onPressed: () => {print(cartList.value[index].name)},
-            child: Text('${cartList.value[index].name}'),
+            child: Text('${cartList.value[index].name}',style:TextStyle(color: Colors.white)),
             color: Colors.green,
-          ),
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () =>
-                {cartList.changeItem(index, cartList.value[index].count + 1)},
-          ),
-          FlatButton(
-            onPressed: () => {},
-            child: Text('${cartList.value[index].count}'),
-          ),
-          IconButton(
-            icon: Icon(Icons.remove),
-            onPressed: () =>
-                {cartList.changeItem(index, cartList.value[index].count - 1)},
-          ),
-
-          FlatButton(
-            onPressed: () => {},
+            
+          ),),
+         SizedBox( 
+            width:100,
+            height:40,
+           child: FlatButton(
+           onPressed: () => {},
             child: Text(
               '单价：${cartList.value[index].price}',
             ),
-          ),
-          IconButton(
+            
+          ),),
+           SizedBox( 
+            width:40,
+            height:40,
+           child: IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () =>
+                {cartList.changeItem(index, cartList.value[index].count + 1)},
+          ),),
+           SizedBox( 
+            width:40,
+            height:40,
+           child: FlatButton(
+          onPressed: () => {},
+            child: Text('${cartList.value[index].count}'),
+            
+          ),),
+           SizedBox( 
+            width:40,
+            height:40,
+           child:  IconButton(
+            icon: Icon(Icons.remove),
+            onPressed: () =>
+                {cartList.changeItem(index, cartList.value[index].count - 1)},
+          ),),
+         
+         SizedBox( 
+            width:40,
+            height:40,
+           child:  IconButton(
             onPressed: () => {cartList.removeItem(index)},
             icon: Icon(Icons.delete),
             color: Colors.deepOrange,
-          )
-
+          ),),        
           //  Icon(Icons.remove),Text('${cartList.value[index].count}'),Icon(Icons.add),
           //  Text('单价：${cartList.value[index].price}',),
         ],
       ),
       height: 300,
-      width: 300,
+      width: 350,
     );
   }
 }
